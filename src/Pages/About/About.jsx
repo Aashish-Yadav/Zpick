@@ -59,6 +59,7 @@ function About() {
           </div>
           <div className='w-3/5'>
             <p>🎎 Collectible Figures & Toys – Bring home detailed anime figures, plushies, and action figures of your beloved characters..</p>
+            <br/>
             <p>🎁 Accessories & More – From keychains to posters, we have the perfect anime-inspired accessories to complete your collection.</p>
           </div>
         </div>

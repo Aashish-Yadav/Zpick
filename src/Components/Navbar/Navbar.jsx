@@ -20,7 +20,7 @@ function Navbar() {
             {/* <li>Home</li> */}
             <Link to='/about'><li>About</li></Link>
             <Link to='/contact'><li>Contact</li></Link>
-            <li className='py-1'><FaShoppingCart /></li>
+            <Link to='/cart'><li className='py-1'><FaShoppingCart /></li></Link>
           </ul>
         </div>
       </div>
