@@ -1,32 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { Figure_List } from "../../assets/assets";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function ListPage() {
-
-    // const [cart, setCart] = useState('')
-    // const [Count, setCount] = useState(Array(Figure_List.length).fill(0));
-    
-
-    // function handleDecrease(index){
-    //     if(Count[index]>0){
-    //         setCount(prevCount =>
-    //           prevCount.map((Count, i) => (i === index ? Count - 1 : Count))
-    //         );
-    //     }
-    // }
-    // function handleIncrease(index){
-    //     if(Count[index]>=0){
-    //         setCount(prevCount =>
-    //           prevCount.map((Count, i) => (i === index ? Count + 1 : Count))
-    //         );
-    //     }
-    // }
-    // useEffect(() => {
-    //     console.log("Updated count", Count)
-    // }, [Count])
-    
-
   return (
     <div className="w-full mt-10 p-4">
       {/* Title */}
@@ -35,10 +12,10 @@ function ListPage() {
       </div>
 
       {/* Swiper Slider */}
-      <div className="mt-5 flex flex-wrap gap-5">
+      <div className="mt-5 flex flex-wrap justify-center gap-5">
         
           {Figure_List.map((item, index) => (
-              <div key={index} className="mx-auto py-3 rounded-lg px-3 bg-gray-100 shadow-xl">
+             <Link key={item.id} to={`/ProductDetails/${item.id}`}><div key={index} className="mx-auto py-3 rounded-lg px-3 bg-gray-100 shadow-xl">
                 <div className="flex justify-center">
                   <img
                     src={item.img}
@@ -56,12 +33,12 @@ function ListPage() {
                   <div>
                     <div className="flex bg-gray-200 py-1 px-3 rounded-xl">
                       {/* <p className="shadow-xl mr-2 cursor-pointer " onClick={()=>handleDecrease(index)}>-</p> */}
-                      <p className="mr-2 shadow-xl cursor-pointer px-5 py-1 hover:sacle-110"><FaShoppingCart /></p>
+                     <p className="mr-2 shadow-xl cursor-pointer px-5 py-1 hover:sacle-110"><FaShoppingCart/></p>
                       {/* <p className="cursor-pointer shadow-xl" onClick={()=>handleIncrease(index)}>+</p> */}
                     </div>
                   </div>
                 </div>
-              </div>
+              </div></Link> 
           ))}
       </div>
     </div>

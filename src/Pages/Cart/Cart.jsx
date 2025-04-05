@@ -1,37 +1,81 @@
-import React from 'react'
-import Navbar from '../../Components/Navbar/Navbar'
-import Footer from '../../Components/Footer/Footer'
-import goku from '../../assets/goku.jpg'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Figure_List } from '../../assets/assets.js';
+import Navbar from '../../Components/Navbar/Navbar.jsx';
+import Footer from '../../Components/Footer/Footer.jsx';
 
 function Cart() {
+  // const { productId } = useParams();
+  const [cartData, setCartData] = useState([]);
+  
+  // useEffect(() => {
+  //   const selectedProduct = Figure_List.find((item) => item.id === productId);
+    
+  //   if (selectedProduct) {
+  //     setCartData((prevCart) => {
+  //       const isProductInCart = prevCart.some((item) => item.id === selectedProduct.id);
+  //       return isProductInCart ? prevCart : [...prevCart, { ...selectedProduct, quantity: 1 }];
+  //     });
+  //   }
+  // }, [productId]);
+
+  // const handleIncrease = (id) => {
+  //   setCartData((prevCart) =>
+  //     prevCart.map((item) =>
+  //       item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+  //     )
+  //   );
+  // };
+
+  // const handleDecrease = (id) => {
+  //   setCartData((prevCart) =>
+  //     prevCart.map((item) =>
+  //       item.id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+  //     )
+  //   );
+  // };
+
+  // const handleRemove = (id) => {
+  //   setCartData((prevCart) => prevCart.filter((item) => item.id !== id));
+  // };
+
   return (
     <div>
       <div><Navbar/></div>
-      <div className='bg-gray-200 w-full h-screen flex justify-center'>
-          <div className='flex bg-white md:w-3xl h-fit py-10 justify-around w-sm px-3 md:rounded-lg mt-10 relative'>
-            <div>
-              <img src={goku} className='md:w-60 h-auto size-30'/>
-            </div>
-            <div className='absolute right-4 top-1 text-gray-500 cursor-pointer'>&#x2718;</div>
-
-            <div className='h-full'>
-              <div className='mb-17'>
-              <p>Goku Figure</p>
-              <p>Description- it is a that that that</p>
-              </div>
-              <div className='flex justify-between'>
-                <div>Price</div>
-                <div>
-                  <span className='bg-gray-300 px-4 rounded-l-xl py-1 mr-1 text-md shadow-r-xl cursor-pointer'>-</span> 
-                  <span className='bg-gray-300 px-3 rounded-r-xl py-1 shadow-l-xl text-md cursor-pointer'>+</span>
+      <h1 className="text-2xl font-bold text-center my-5">Your Cart</h1>
+      <div className="bg-gray-200 w-full min-h-screen flex flex-col items-center">
+        {cartData.length === 0 ? (
+          <p className="text-xl">Your cart is empty</p>
+        ) : (
+          cartData.map((item) => (
+            <div key={item.id} className="flex bg-white w-2/3 p-5 my-3 shadow-lg rounded-lg">
+              <img src={item.img} alt={item.name} className="w-40 h-40 object-cover" />
+              <div className="ml-5">
+                <h2 className="text-xl font-semibold">{item.name}</h2>
+                <p>Price: ₹{item.price * item.quantity}</p>
+                <div className="flex items-center mt-2">
+                  <button className="bg-gray-300 px-4 py-1 rounded-l-xl cursor-pointer" onClick={() => handleDecrease(item.id)}>
+                    -
+                  </button>
+                  <span className="px-4">{item.quantity}</span>
+                  <button className="bg-gray-300 px-4 py-1 rounded-r-xl cursor-pointer" onClick={() => handleIncrease(item.id)}>
+                    +
+                  </button>
                 </div>
+                <button
+                  className="mt-3 bg-red-500 text-white px-4 py-2 rounded"
+                  onClick={() => handleRemove(item.id)}
+                >
+                  Remove
+                </button>
               </div>
             </div>
-          </div>
+          ))
+        )}
       </div>
       <div><Footer/></div>
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

@@ -64,42 +64,58 @@ export const slider_List = [{
 
 
 export const Figure_List =[{
+    id:"1",
     img:goku,
     name:"Goku Merch",
     price:"200",
+    rating:"5"
 },
 {
+    id:"2",
     img:naruto,
     name:'Naruto Merch',
     price:"300",
+    rating:"5"
 },
 {
+    id:"3",
     img:nami,
     name:"Nami Merch",
     price:"250",
+    rating:"3"
 },
 {
+    id:"4",
     img:roger,
     name:"Roger Merch",
     price:"400",
+    rating:"4"
 },
 {
+    id:"5",
     img:roshi,
     name:"Roshi Merch",
     price:"200",
+    rating:"4"
 },
 {
+    id:"6",
     img:zoro,
     name:"Zoro Merch",
     price:"500",
+    rating:"5"
 },
 {
+    id:"7",
     img:cat,
     name:"Cat Merch",
     price:"200",
+    rating:"2"
 },
 {
+    id:"8",
     img:picolo,
     name:"Picolo Merch",
     price:"300",
+    rating:"4"
 },]
