@@ -5,6 +5,8 @@ import About from './Pages/About/About.jsx'
 import Contact from './Pages/Contact/Contact.jsx';
 import Cart from './Pages/Cart/Cart.jsx';
 import ProductDetail from './Pages/ProductDetail/ProductDetail.jsx';
+import LoginPage from './Pages/LoginPage/LoginPage.jsx';
+import RegisterPage from './Pages/RegisterPage/RegisterPage.jsx';
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
         <Route path="/contact" element={<Contact/>}></Route>
         <Route path="/cart" element={<Cart/>}></Route>
         <Route path="/ProductDetails/:ProductId" element={<ProductDetail/>}></Route>
+        <Route path="/login" element={<LoginPage/>}></Route>
+        <Route path="/register" element={<RegisterPage/>}></Route>
       </Routes>
     </Router>
     </>
