@@ -1,19 +1,44 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Navigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add login logic here
+    setLoading(true)
+
+    const payload ={
+      email:email,
+      password:password
+    }    
+    axios.post('http://localhost:4000/user/login',payload)
+    .then((res)=>{
+      console.log("user logged in",res)
+      setLoading(false)
+      toast.success(res?.data.message);
+      localStorage.setItem('token', JSON.stringify(res?.data?.token))
+      setTimeout(() => navigate("/"), 4000);
+    })
+    .catch((err)=>{
+      console.log("something went wrong while login", err)
+      setLoading(false)
+      toast.error(err?.response?.data?.message || "Registration failed");    
+    })
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 flex-col ">
+      <h1 className="text-blue-500 my-3 text-3xl font-bold">Zpick</h1>
       <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Login to Your Account</h2>
 
@@ -50,10 +75,11 @@ function LoginPage() {
           </div>
 
           <button
+          disabled={loading}
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition duration-200"
+            className="w-full bg-blue-600 disabled:opacity-70 text-white py-2 rounded-xl hover:bg-blue-700 transition duration-200"
           >
-            Sign In
+            {loading ? 'submitting...' : "signin"}
           </button>
         </form>
 
@@ -64,6 +90,7 @@ function LoginPage() {
           </Link>
         </p>
       </div>
+      <ToastContainer position="top-right"/>
     </div>
   );
 }
