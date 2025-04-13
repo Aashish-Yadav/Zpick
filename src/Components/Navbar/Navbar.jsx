@@ -30,9 +30,9 @@ function Navbar() {
             {/* <li>Home</li> */}
             {/* <Link to='/about'><li>About</li></Link>
             <Link to='/contact'><li>Contact</li></Link> */}
-            <Link to='/profile'><li className='py-1 text-lg'><FaUserCircle /></li></Link>
+            <Link to='/profile'><li className='py-1 text-lg cursor-pointer'><FaUserCircle /></li></Link>
             <Link to='/cart'><li className='py-1 text-lg'><FaShoppingCart /></li></Link>
-            <li className='py-1 text-lg' onClick={handleLogout}><MdOutlineLogout /></li>
+            <li className='py-1 text-lg cursor-pointer' onClick={handleLogout}><MdOutlineLogout /></li>
           </ul>
         </div>
       </div>

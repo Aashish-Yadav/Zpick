@@ -27,7 +27,7 @@ function LoginPage() {
       setLoading(false)
       toast.success(res?.data.message);
       localStorage.setItem('token', JSON.stringify(res?.data?.token))
-      setTimeout(() => navigate("/"), 4000);
+      setTimeout(() => navigate("/"), 2000);
     })
     .catch((err)=>{
       console.log("something went wrong while login", err)
