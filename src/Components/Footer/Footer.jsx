@@ -9,7 +9,7 @@ function Footer() {
           <ul className='text-center '>
             <h1 className='text-xl font-semibold text-black'>Get to know Us</h1>
             <Link to='/about'><li className='mt-5 cursor-pointer hover:scale-110 hover:underline'>About</li></Link>
-            <li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Contact</li>
+            <Link to='/contact'><li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Contact</li></Link>
             <li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Terms & Condition</li>
             <li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Privacy</li>
           </ul>

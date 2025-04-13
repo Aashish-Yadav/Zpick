@@ -7,6 +7,7 @@ import Cart from './Pages/Cart/Cart.jsx';
 import ProductDetail from './Pages/ProductDetail/ProductDetail.jsx';
 import LoginPage from './Pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './Pages/RegisterPage/RegisterPage.jsx';
+import UserProfile from './Pages/UserProfile/UserProfile.jsx';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/ProductDetails/:ProductId" element={<ProductDetail/>}></Route>
         <Route path="/login" element={<LoginPage/>}></Route>
         <Route path="/register" element={<RegisterPage/>}></Route>
+        <Route path="/profile" element={<UserProfile/>}></Route>
       </Routes>
     </Router>
     </>
