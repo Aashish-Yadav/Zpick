@@ -33,7 +33,7 @@ function ListPage() {
                   <div>
                     <div className="flex bg-gray-200 py-1 px-3 rounded-xl">
                       {/* <p className="shadow-xl mr-2 cursor-pointer " onClick={()=>handleDecrease(index)}>-</p> */}
-                     <p className="mr-2 shadow-xl cursor-pointer px-5 py-1 hover:sacle-110"><FaShoppingCart/></p>
+                     <p >Buy Now</p>
                       {/* <p className="cursor-pointer shadow-xl" onClick={()=>handleIncrease(index)}>+</p> */}
                     </div>
                   </div>

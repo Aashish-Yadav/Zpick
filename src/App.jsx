@@ -16,15 +16,15 @@ function App() {
     <>
     <Router>
       <Routes>
-
         <Route element={<ProtectedRoute/>}>
         <Route path="/profile" element={<UserProfile/>}></Route>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
         <Route path="/cart" element={<Cart/>}></Route>
-        <Route path="/ProductDetails/:ProductId" element={<ProductDetail/>}></Route>
         </Route>
+
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/about" element={<About/>}></Route>
+        <Route path="/ProductDetails/:ProductId" element={<ProductDetail/>}></Route>
 
         <Route path="/login" element={<LoginPage/>}></Route>
         <Route path="/register" element={<RegisterPage/>}></Route>

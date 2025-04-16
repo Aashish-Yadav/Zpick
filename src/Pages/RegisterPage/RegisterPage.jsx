@@ -24,7 +24,7 @@ export default function RegisterPage() {
       password: password
     }
     console.log(payload);
-    axios.post('http://localhost:4000/user/register', payload)
+    axios.post('http://localhost:4000/user/register', {payload})
     .then((res)=>{
       console.log("User Registered", res)
       setLoading(false)
@@ -32,7 +32,7 @@ export default function RegisterPage() {
       setTimeout(() => navigate("/login"), 4000);
     })
     .catch((err) => {
-      console.log("something went wrong", err);
+      console.log("something wenttt wrong", err);
       setLoading(false);
       toast.error(err?.response?.data?.message || "Registration failed");
     });
