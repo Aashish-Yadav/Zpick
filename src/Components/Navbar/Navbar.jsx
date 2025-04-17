@@ -38,11 +38,11 @@ function Navbar() {
         <div className='collapse md:visible'>
           <ul className='flex gap-6 font-semibold text-base text-white items-center'>
             <Link to='/profile'>
-              <li className='py-1 text-lg cursor-pointer hover:text-gray-200'><FaUserCircle /></li>
+              <li className='py-1 text-lg cursor-pointer hover:text-gray-200' title="User Profile"><FaUserCircle /></li>
             </Link>
 
             <Link to='/cart'>
-              <li className='py-1 text-lg cursor-pointer hover:text-gray-200'><FaShoppingCart /></li>
+              <li className='py-1 text-lg cursor-pointer hover:text-gray-200' title="Cart"><FaShoppingCart /></li>
             </Link>
 
             {!isLoggedIn ? (
@@ -53,6 +53,7 @@ function Navbar() {
               <li
                 className='py-1 text-lg cursor-pointer hover:text-gray-200 flex items-center gap-1'
                 onClick={handleLogout}
+                title="Logout"
               >
                 <MdOutlineLogout />
               </li>
