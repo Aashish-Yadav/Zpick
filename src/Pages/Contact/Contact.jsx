@@ -42,7 +42,7 @@ function Contact() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div><Navbar/></div>
+      
       
       <main className="flex-grow bg-gray-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -211,7 +211,6 @@ function Contact() {
         </div>
       </main>
       
-      <div><Footer/></div>
     </div>
   )
 }

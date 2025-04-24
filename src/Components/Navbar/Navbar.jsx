@@ -17,9 +17,10 @@ function Navbar() {
   
   const handleSearch = (e) => {
     e.preventDefault();
-    // Implement search functionality
-    console.log('Searching for:', searchQuery);
-    // navigate(`/search?q=${searchQuery}`);
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery(''); // Optional: clear the search field after submitting
+    }
   };
   
   const toggleMenu = () => {

@@ -9,12 +9,15 @@ import LoginPage from './Pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './Pages/RegisterPage/RegisterPage.jsx';
 import UserProfile from './Pages/UserProfile/UserProfile.jsx';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute.jsx';
+import Navbar from './Components/Navbar/Navbar.jsx';
+import Footer from './Components/Footer/Footer.jsx';
 
 function App() {
 
   return (
     <>
     <Router>
+    <Navbar />
       <Routes>
         <Route element={<ProtectedRoute/>}>
         <Route path="/profile" element={<UserProfile/>}></Route>
@@ -29,6 +32,7 @@ function App() {
         <Route path="/login" element={<LoginPage/>}></Route>
         <Route path="/register" element={<RegisterPage/>}></Route>
       </Routes>
+      <Footer/>
     </Router>
     </>
   )

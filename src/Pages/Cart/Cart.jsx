@@ -41,7 +41,6 @@ function Cart() {
 
   return (
     <div>
-      <div><Navbar/></div>
       <h1 className="text-2xl font-bold text-center my-5">Your Cart</h1>
       <div className="bg-gray-200 w-full min-h-screen flex flex-col items-center">
         {cartData.length === 0 ? (
@@ -73,7 +72,6 @@ function Cart() {
           ))
         )}
       </div>
-      <div><Footer/></div>
     </div>
   );
 }

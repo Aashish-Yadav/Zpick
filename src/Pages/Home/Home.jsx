@@ -9,11 +9,9 @@ import Footer from '../../Components/Footer/Footer'
 function Home() {
   return (
     <div>
-        <Navbar/>
         {/* <Search/> */}
         <Carousal/>
         <ListPage/>
-        <Footer/>
     </div>
   )
 }

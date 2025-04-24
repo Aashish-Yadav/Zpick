@@ -20,7 +20,7 @@ function ProductDetail() {
 
   return (
     <div className='w-full min-h-screen bg-gray-100'>
-      <Navbar />
+      
 
       <div className='max-w-5xl mx-auto bg-white shadow-lg rounded-xl my-10 p-6 flex flex-col md:flex-row gap-6'>
         {/* Product Image */}
@@ -65,7 +65,6 @@ function ProductDetail() {
         </div>
       </div>
 
-      <Footer />
     </div>
   );
 }
