@@ -11,6 +11,8 @@ import UserProfile from './Pages/UserProfile/UserProfile.jsx';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute.jsx';
 import Navbar from './Components/Navbar/Navbar.jsx';
 import Footer from './Components/Footer/Footer.jsx';
+import PrivacyPolicy from './Pages/PrivacyPolices/PrivacyPolicy.jsx';
+import TermsAndConditions from './Pages/T&C/TermsAndConditions.jsx';
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
         <Route path="/profile" element={<UserProfile/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
         <Route path="/cart" element={<Cart/>}></Route>
+        <Route path="/privacyPolicies" element={<PrivacyPolicy/>}></Route>
+        <Route path="/t&c" element={<TermsAndConditions/>}></Route>
         </Route>
 
         <Route path="/" element={<Home/>}></Route>

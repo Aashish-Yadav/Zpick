@@ -10,8 +10,8 @@ function Footer() {
             <h1 className='text-xl font-semibold text-black'>Get to know Us</h1>
             <Link to='/about'><li className='mt-5 cursor-pointer hover:scale-110 hover:underline'>About</li></Link>
             <Link to='/contact'><li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Contact</li></Link>
-            <li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Terms & Condition</li>
-            <li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Privacy</li>
+            <Link to="/t&c"><li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Terms & Condition</li></Link>
+            <Link to="/privacyPolicies"><li className='cursor-pointer hover:scale-110 hover:underline mt-2'>Privacy</li></Link>
           </ul>
         </div>
         <div className='text-white md:text-xl'>
