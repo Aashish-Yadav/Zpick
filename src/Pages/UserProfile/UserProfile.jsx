@@ -9,20 +9,41 @@ function UserProfile() {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [uploadLoading, setUploadLoading] = useState(false);
 
-    const token = JSON.parse(localStorage.getItem('token'))
+    // Get token from localStorage 
+    const token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null;
+
+    // Debug function to display the structure of data
+    const debugData = () => {
+        console.log('Full profile data:', data);
+        if (data?.data) {
+            console.log('User object:', data.data);
+            console.log('MongoDB ID:', data.data._id);
+            console.log('User ID:', data.data.id);
+        }
+    };
 
     const fetchData = () => {
+        if (!token) {
+            setError("Authentication token not found");
+            setLoading(false);
+            return;
+        }
+
         axios.post('http://localhost:4000/user/profile', {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
         .then((res) => {
+            console.log("aaaaa",res)
             setLoading(false);
             setData(res?.data);
+            debugData(); // Log data structure for debugging
         })
-        .catch(() => {
+        .catch((err) => {
+            console.error("Profile fetch error:", err.response?.data || err.message);
             setLoading(false);
             setError("Failed to load profile data");
         });
@@ -30,30 +51,77 @@ function UserProfile() {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, []);
+
+    const getUserId = () => {
+        // Try all possible ID fields in your data structure
+        if (data?.data?._id) return data.data._id;
+        if (data?.data?.id) return data.data.id;
+        if (data?.data?.userId) return data.data.userId;
+        if (data?.userId) return data.userId;
+        if (data?._id) return data._id;
+        return null;
+    };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        if (file) {
-            setSelectedImage(file);
-            const formData = new FormData();
-            formData.append('file', file);
+        if (!file) return;
 
-            axios.post('http://localhost:4000/upload/image', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(res => {
-                alert("Image uploaded!");
-                fetchData(); // refetch user profile if photo path is updated
-            })
-            .catch(err => {
-                console.error("Upload failed", err);
-                alert("Image upload failed");
-            });
+        // Validate file type and size
+        const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
+        const maxSize = 5 * 1024 * 1024; // 5MB
+
+        if (!validTypes.includes(file.type)) {
+            alert("Please select a valid image file (JPEG, PNG, GIF)");
+            return;
         }
-    }
+
+        if (file.size > maxSize) {
+            alert("Image is too large. Maximum size is 5MB");
+            return;
+        }
+
+        setSelectedImage(file);
+        const userId = getUserId();
+        
+        if (!userId) {
+            alert("Could not determine user ID. Please try refreshing the page.");
+            console.error("User ID not found in data:", data);
+            return;
+        }
+
+        // Create FormData and append necessary fields
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('userId', userId);
+
+        // Log FormData entries for debugging
+        console.log('File being uploaded:', file.name);
+        console.log('User ID being sent:', userId);
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
+
+        setUploadLoading(true);
+
+        axios.post('http://localhost:4000/upload/image', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(res => {
+            console.log("Upload successful:", res.data);
+            alert("Image uploaded successfully!");
+            setUploadLoading(false);
+            fetchData(); // Refresh user data
+        })
+        .catch(err => {
+            setUploadLoading(false);
+            console.error("Upload failed:", err.response?.data || err.message);
+            alert("Image upload failed: " + (err.response?.data?.error || err.message));
+        });
+    };
 
     if (loading) {
         return (
@@ -87,8 +155,11 @@ function UserProfile() {
     }
 
     const userData = data?.data || {};
-    const defaultAvatar = "https://via.placeholder.com/150";
-
+    // const defaultAvatar = "https://via.placeholder.com/150";
+    
+    // Determine the profile image URL
+    const profileImage = userData.profileImage || userData.photo ;
+    
     return (
         <div className="bg-gray-50 min-h-screen">
             
@@ -99,7 +170,7 @@ function UserProfile() {
                     <div className="relative px-4 sm:px-6 lg:px-8 pb-8">
                         <div className="relative -mt-16 flex justify-center">
                             <img 
-                                src={userData.photo || defaultAvatar} 
+                                src={profileImage} 
                                 alt="Profile" 
                                 className="h-32 w-32 rounded-full border-4 border-white shadow-lg object-cover"
                             />
@@ -109,19 +180,30 @@ function UserProfile() {
                         <div className="mt-4 text-center">
                             <label className="cursor-pointer text-sm text-blue-600 flex items-center justify-center space-x-2">
                                 <UploadCloud className="w-5 h-5" />
-                                <span>Change Profile Picture</span>
+                                <span>{uploadLoading ? "Uploading..." : "Change Profile Picture"}</span>
                                 <input 
                                     type="file" 
-                                    accept="image/*" 
+                                    accept="image/jpeg, image/png, image/gif, image/jpg" 
                                     className="hidden"
                                     onChange={handleImageChange}
+                                    disabled={uploadLoading}
                                 />
                             </label>
+                            {uploadLoading && (
+                                <div className="mt-2">
+                                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+                                </div>
+                            )}
                         </div>
                         
                         <div className="mt-6 text-center">
                             <h1 className="text-3xl font-bold text-gray-900">{userData.name || "User Name"}</h1>
                             <p className="text-sm text-gray-500 mt-1">Member since {userData.joinedDate || "2023"}</p>
+                        </div>
+
+                        {/* Debug section - remove in production */}
+                        <div className="mt-4 bg-yellow-50 p-2 rounded text-xs text-center text-yellow-700">
+                            <p>User ID: {getUserId() || "Unknown"}</p>
                         </div>
 
                         {/* User Details */}
@@ -134,7 +216,7 @@ function UserProfile() {
                                     </div>
                                     <div className="ml-4">
                                         <p className="text-sm font-medium text-gray-500">User ID</p>
-                                        <p className="text-lg font-semibold text-gray-900">{userData.id || "ID12345"}</p>
+                                        <p className="text-lg font-semibold text-gray-900">{getUserId() || userData.id || userData._id || "ID12345"}</p>
                                     </div>
                                 </div>
 
@@ -182,8 +264,7 @@ function UserProfile() {
                     </div>
                 </div>
             </div>
-            
-        </div>
+                    </div>
     )
 }
 
