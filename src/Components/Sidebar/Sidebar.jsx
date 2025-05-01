@@ -18,7 +18,7 @@ function Sidebar() {
         // { title: 'Settings', icon: <Settings size={20} /> },
       ];
   return (
-    <div className={`${toggle ? 'w-20' : 'w-40'} bg-blue-100 h-screen`}>
+    <div className={`${toggle ? 'w-20' : 'w-40'} bg-gray-200 h-screen`}>
       <div className= 'flex justify-between align-center p-4'>
         {!toggle && <span className='font-bold text-xl'>Menu</span>}
         <button onClick={handleToggle}>{toggle ? <IoIosArrowForward /> : <IoIosArrowBack />}

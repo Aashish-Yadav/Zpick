@@ -2,8 +2,23 @@ import React, {useEffect, useState} from "react";
 import { Figure_List } from "../../assets/assets";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function ListPage() {
+
+  const [productData, setProductData] = useState([])
+
+  useEffect(()=>{
+    axios.get('http://localhost:4000/upload/product')
+    .then((res)=>{
+      console.log(res?.data?.data)
+      setProductData(res?.data?.data)
+    })
+    .catch((err)=>{
+      console.log("error",err)
+    })
+  },[])
+
   return (
     <div className="w-full mt-10 p-4">
       {/* Title */}
@@ -14,11 +29,11 @@ function ListPage() {
       {/* Swiper Slider */}
       <div className="mt-5 flex flex-wrap justify-center gap-5">
         
-          {Figure_List.map((item, index) => (
+          {productData.map((item, index) => (
              <Link key={item.id} to={`/ProductDetails/${item.id}`}><div key={index} className="mx-auto py-3 rounded-lg px-3 bg-gray-100 shadow-xl">
                 <div className="flex justify-center">
                   <img
-                    src={item.img}
+                    src={item.image}
                     className="md:h-70 md:w-70 h-40 w-40 object-cover"
                     alt={item.name}
                   />
