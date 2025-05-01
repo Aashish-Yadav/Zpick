@@ -13,6 +13,8 @@ import Navbar from './Components/Navbar/Navbar.jsx';
 import Footer from './Components/Footer/Footer.jsx';
 import PrivacyPolicy from './Pages/PrivacyPolices/PrivacyPolicy.jsx';
 import TermsAndConditions from './Pages/T&C/TermsAndConditions.jsx';
+import DashBoard from './Pages/DashBoard/DashBoard.jsx';
+import AddProduct from './Components/AddProduct/AddProduct.jsx';
 
 function App() {
 
@@ -35,6 +37,8 @@ function App() {
 
         <Route path="/login" element={<LoginPage/>}></Route>
         <Route path="/register" element={<RegisterPage/>}></Route>
+        <Route path="/admindashboard" element={<DashBoard/>}></Route>
+        <Route path="/admindashboard/addproduct" element={<AddProduct/>}></Route>
       </Routes>
       <Footer/>
     </Router>
