@@ -4,14 +4,22 @@ import Navbar from '../../Components/Navbar/Navbar.jsx';
 import Footer from '../../Components/Footer/Footer.jsx';
 import { useParams } from 'react-router-dom';
 import { CiStar } from "react-icons/ci";
+import axios from 'axios';
 
 function ProductDetail() {
   const { ProductId } = useParams();
   const [productData, setProductData] = useState(null);
 
   useEffect(() => {
-    const foundProduct = Figure_List.find(item => item.id == ProductId);
-    setProductData(foundProduct);
+    // const foundProduct = Figure_List.find(item => item.id == ProductId);
+    // setProductData(foundProduct);
+    axios.get(`http://localhost:4000/upload/product/details/${Product}`)
+    .then((res)=>{
+      console.log('id',res)
+    })
+    .catch((err)=>{
+      console.log("error in id fetching",err)
+    })
   }, [ProductId]);
 
   if (!productData) {
