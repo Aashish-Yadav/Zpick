@@ -15,6 +15,7 @@ import PrivacyPolicy from './Pages/PrivacyPolices/PrivacyPolicy.jsx';
 import TermsAndConditions from './Pages/T&C/TermsAndConditions.jsx';
 import DashBoard from './Pages/DashBoard/DashBoard.jsx';
 import AddProduct from './Components/AddProduct/AddProduct.jsx';
+import SearchPage from './Components/SearchPage/SearchPage.jsx';
 
 function App() {
 
@@ -34,6 +35,8 @@ function App() {
         <Route path="/" element={<Home/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/ProductDetails/:ProductId" element={<ProductDetail/>}></Route>
+        <Route path="/search" element={<SearchPage/>}></Route>
+
 
         <Route path="/login" element={<LoginPage/>}></Route>
         <Route path="/register" element={<RegisterPage/>}></Route>

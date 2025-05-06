@@ -4,6 +4,7 @@ import { FaShoppingCart, FaUserCircle, FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineLogout } from "react-icons/md";
+import axios from 'axios';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -15,13 +16,24 @@ function Navbar() {
     navigate('/login');
   };
   
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-      setSearchQuery(''); // Optional: clear the search field after submitting
+      try {
+        const response = await axios.get(`http://localhost:4000/product/search?q=${encodeURIComponent(searchQuery)}`);
+        const searchResult = response.data;
+  
+        navigate(`/search?q=${encodeURIComponent(searchQuery)}`, {
+          state: { result: searchResult },
+        });
+  
+        setSearchQuery(''); // Clear the search box
+      } catch (error) {
+        console.error('Search error:', error);
+      }
     }
   };
+  
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
