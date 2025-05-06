@@ -249,7 +249,7 @@ function UserProfile() {
                                     </div>
                                     <div className="ml-4">
                                         <p className="text-sm font-medium text-gray-500">Account Type</p>
-                                        <p className="text-lg font-semibold text-gray-900">{userData.accountType || "Standard"}</p>
+                                        <p className="text-lg font-semibold text-gray-900">{userData.role || "Not Given"}</p>
                                     </div>
                                 </div>
                             </div>
