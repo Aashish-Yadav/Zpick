@@ -27,6 +27,7 @@ function LoginPage() {
       setLoading(false)
       toast.success(res?.data.message);
       localStorage.setItem('token', JSON.stringify(res?.data?.token))
+      localStorage.setItem('role', JSON.stringify(res?.data?.user?.role))
       setTimeout(() => navigate("/"), 2000);
     })
     .catch((err)=>{
